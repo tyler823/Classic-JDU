@@ -79,6 +79,15 @@
     <label class="visually-hidden" for="search-input">Search guides</label>
     <input type="search" id="search-input" class="search-input" placeholder="Search guides" autocomplete="off">
 
+    <!-- A sighted reader watches cards disappear as they type. Without this a
+         screen reader user gets nothing at all: the filter changes the page
+         silently. app.js writes a short count here, and only when the count
+         actually changes, because a live region rewritten with the same sentence
+         on every keystroke buries the announcement that mattered under a stream
+         of identical ones. It stays empty while the box is empty, since there is
+         nothing to announce about an unfiltered list. -->
+    <p class="visually-hidden" id="search-status" role="status" aria-live="polite"></p>
+
     <nav aria-label="Guide categories">
       <ul class="cat-list">
         <li><a class="cat-item" href="#cl-projects">Projects</a></li>
@@ -328,6 +337,12 @@
 <footer class="site-foot">
   <p>&copy; 2026 Job-Dox LLC</p>
 </footer>
+
+<!-- defer, so the parser is never blocked and the DOM is complete before this
+     runs. Last in body as well, which is belt and braces: the page reads and
+     navigates with no script at all, and this only adds filtering and the
+     sidebar highlight. -->
+<script src="/app.js" defer></script>
 
 </body>
 </html>
