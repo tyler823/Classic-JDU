@@ -1,0 +1,79 @@
+# Classic JDU. The JobDox Classic training guides, served at classic.job-dox.ai.
+#
+# Static site. There is no build step, no bundler, no framework and no serverless
+# function. Netlify publishes the checkout as it stands, so a deploy is whatever
+# is committed. Editing a file and pushing it is the whole release process.
+#
+# There is deliberately no `command` key, no `functions` key and no NODE_VERSION.
+# Adding any of them would mean this repo has a build, and it does not. Node is
+# needed only to run tools/brand-check.mjs by hand, which happens on a developer
+# machine and never at deploy time.
+
+[build]
+  publish = "."
+
+# PUBLISH ROOT IS THE REPO ROOT, AND THAT IS A DECISION ON THE RECORD RATHER THAN
+# AN ACCIDENT.
+#
+# `publish = "."` means every path in this repository is a public URL. That
+# includes README.md, brand/README.md, brand/tokens.css, brand/BRAND.md if one is
+# ever copied down, and tools/brand-check.mjs. Anyone can fetch them.
+#
+# That is acceptable here because nothing in this repository is secret: it is
+# documentation, a copied token file, and a lint script. There are no keys, no
+# environment values, no customer data and no server code. The alternative, a
+# build command that deletes paths before upload plus a deny list of forced 404s,
+# is what the marketing site needs and would be unearned complexity here.
+#
+# What this does mean is that anything added later is public the moment it is
+# committed. If a file ever arrives that should not be, the fix is to not commit
+# it, or to add the redirect and build machinery at that point as a considered
+# change. Do not assume a path is private because it looks internal.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+
+    # The policy is built from what this site actually does, which is less than
+    # the funnels site does. There is no Turnstile, no analytics, no tag manager,
+    # no pixel and no form, so the directives that exist for those are absent
+    # rather than permissive.
+    #
+    # script-src 'self' with no third party origin at all. If a tag is ever
+    # added, it has to be added here too, which is the point: the policy is the
+    # place that decision becomes visible.
+    #
+    # style-src carries 'unsafe-inline' for the Google Fonts stylesheet, and
+    # font-src carries fonts.gstatic.com for the binary it pulls. Those two
+    # origins are the only third party the site touches. Note 'unsafe-inline' is
+    # on style-src and deliberately NOT on script-src, which is the way round
+    # that matters.
+    #
+    # img-src allows data: for inline SVG icon URIs. There is no remote image
+    # host, because there are no remote images.
+    #
+    # connect-src 'self' and form-action 'none' are both stronger than the
+    # funnels equivalents, and they are honest: this site posts nothing. There is
+    # no form on it at all, so form-action has nothing legitimate to allow.
+    #
+    # THE GUIDE LINKS DO NOT NEED A DIRECTIVE, AND MUST NOT BE GIVEN ONE. Every
+    # guide card opens a new tab to scribehow.com, youtube.com, youtu.be or
+    # drive.google.com. Those are top level NAVIGATIONS, not subresource loads.
+    # CSP governs what a page loads into itself, not where a link takes the
+    # visitor, so none of those four hosts belongs in connect-src, and none
+    # belongs in frame-src either: nothing is fetched from them and nothing is
+    # framed. Adding them would widen the policy while changing no behaviour,
+    # which is the worst of both. If a guide is ever embedded in an iframe rather
+    # than linked, that is the change that earns a frame-src entry.
+    #
+    # There is no frame-src line at all, on purpose. default-src 'self' is the
+    # fallback for it, so an iframe of a third party is already refused.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'"
+
+# No redirects block. The root serves index.html directly, which is what a single
+# page site should do. The funnels site 302s its bare host at a magnet folder
+# because it has no root page of its own; this site does, so there is nothing to
+# redirect and nothing to remember to remove later.

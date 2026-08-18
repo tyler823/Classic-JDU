@@ -1,0 +1,195 @@
+/* SHELL. Everything a second page on this site would also need.
+
+   Page specific styling belongs in site.css, not here. That split is deliberate
+   and it is the one lesson taken directly from cortexfunnels: three pages there
+   each carry their own copy of the header, the form grid and the stacking
+   breakpoint, and that repo's own notes say lifting the shell into a shared file
+   keeps getting deferred because doing it means touching pages that are already
+   live. Starting with the split costs nothing. Retrofitting it costs a
+   re-verification of every page that already shipped.
+
+   TOKENS ONLY. There is not one literal colour, font size, font weight, letter
+   spacing, line height or border radius in this file. All six read a custom
+   property from brand/tokens.css, which must be linked before this file or every
+   declaration below resolves to nothing. Spacing is the exception and is written
+   in rem, because tokens.css carries no spacing tokens; values step in quarters.
+
+   NO BOX SHADOW, anywhere in this project. Depth comes from the surface ramp
+   (--bg into --s1 into --s2) and 1px hairlines. A shadow on a near black ground
+   reads as mud rather than as elevation.
+
+   Dark only. There is no prefers-color-scheme block and no light palette. Light
+   mode is deferred, not cancelled, and the token discipline above is what keeps
+   it cheap: adding it later is a change to tokens.css, not a rewrite of this
+   file. */
+
+/* ── RESET ────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── DOCUMENT ─────────────────────────────────────────────────────────────── */
+
+/* color-scheme dark is what makes the browser draw its own furniture to match:
+   scrollbars, and the arrow and the open menu on any native select. Without it a
+   native control renders light on a dark page.
+
+   NO BACKGROUND ON html, on purpose. body's background propagates to the root,
+   which is what lets a fixed, negatively stacked background canvas paint above
+   the page ground and below the content. Set a background here and such a canvas
+   is buried under it. There is no canvas on this site today; this keeps the
+   option open at zero cost.
+
+   -webkit-text-size-adjust stops iOS Safari inflating type when a phone turns to
+   landscape, which would break the fitted type scale. */
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* body carries --t2 rather than --t1. Body copy is the secondary ink and
+   headings step up to --t1, so the page reads with hierarchy by default and an
+   element has to ask to be the brightest thing on screen. */
+body {
+  background: var(--bg);
+  color: var(--t2);
+  font-family: var(--ff);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-body);
+  min-height: 100vh;
+}
+
+/* ── HIDDEN ───────────────────────────────────────────────────────────────── */
+
+/* THE !important IS LOAD BEARING. DO NOT REMOVE IT AND DO NOT TIDY IT AWAY.
+
+   The browser's own [hidden] { display: none } is a user agent rule, so it loses
+   to any author rule that sets display, at any specificity. Two real bugs came
+   from exactly that in cortexfunnels: a form kept the display flex it was given
+   after a successful send, leaving a visitor able to submit a second time, and a
+   back button kept the display inline-flex it inherited from its button class,
+   so it showed on the first question where there was nothing to go back to.
+
+   This selector scores the same as a single class, so without !important it
+   would be settled by source order, and any display rule added to site.css later
+   would silently put an element back out of reach of the hidden attribute. */
+[hidden] { display: none !important; }
+
+/* ── FOCUS ────────────────────────────────────────────────────────────────── */
+
+/* ONE global focus ring, and it is the only focus styling in this project. No
+   per component override, and no outline: none anywhere, for any reason.
+
+   :focus-visible rather than :focus, so a pointer click does not leave a ring
+   behind while keyboard navigation still gets one.
+
+   --rd-0 is zero. Squaring the ring rather than letting it follow a rounded
+   element is deliberate: a 2px outline tracing a 10px radius at a 2px offset
+   reads as a soft halo, and a hard rectangle is unmistakably focus. */
+:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 2px;
+  border-radius: var(--rd-0);
+}
+
+/* ── SCREEN READER ONLY ───────────────────────────────────────────────────── */
+
+/* Takes an element off the visual page while leaving it in the accessibility
+   tree. clip-path rather than the older clip property, and a 1px box rather than
+   a zero one, because a zero sized element is dropped from the tree by some
+   engines and display: none would drop it from every one. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── WORDMARK ─────────────────────────────────────────────────────────────── */
+
+/* SET FROM TYPE. THERE IS NO LOGO FILE IN THIS PROJECT AND NONE SHOULD BE ADDED.
+
+   That is a brand requirement rather than a shortcut. This site documents
+   Classic, the legacy product, and it must carry no Cortex logo, no Cortex
+   wordmark and no Cortex product name. A wordmark set from type cannot drift
+   into carrying the wrong brand the way a copied asset file can, and there is no
+   file for anyone to swap.
+
+   Two parts on one baseline: the name, and a tag naming which product this
+   documents. */
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* --t1, one step brighter than the body ink, so the name is the brightest thing
+   in the header without needing a size above the h4 step. */
+.wordmark-name {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-sub);
+  letter-spacing: var(--tr-h3);
+  line-height: var(--lh-h3);
+  color: var(--t1);
+}
+
+/* The one accent element in the shell. --acc on an --acc-lo wash is the same
+   fill and border free pairing the rest of the system uses to mark something as
+   current.
+
+   --lh-mono keeps the pill tight to its text. A body line height would make the
+   tag noticeably taller than the name beside it and the lockup would sit
+   unevenly.
+
+   nowrap because CLASSIC is one word doing one job, and a pill that breaks over
+   two lines stops reading as a tag. The name is allowed to wrap on a narrow
+   viewport. The tag is not, which is what flex: 0 0 auto protects. */
+.wordmark-tag {
+  flex: 0 0 auto;
+  padding: .1875rem .5rem;
+  border-radius: var(--rd-pill);
+  background: var(--acc-lo);
+  color: var(--acc);
+  font-size: var(--fs-mono-sm);
+  font-weight: var(--fw-mono-lb);
+  letter-spacing: var(--tr-mono);
+  line-height: var(--lh-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────────────────── */
+
+/* A hairline and one line of text. --t3 is the dimmest ink in the ramp, and it
+   was re-cut upstream specifically to clear 4.5:1 on every surface it is used
+   on, including the darkest card, so on --bg it has room to spare. */
+.site-foot {
+  border-top: 1px solid var(--br);
+  color: var(--t3);
+  font-size: var(--fs-small);
+}
+
+/* ── REDUCED MOTION ───────────────────────────────────────────────────────── */
+
+/* Nothing in this file animates or transitions, so there is nothing here to
+   switch off yet. The block exists for what comes next: the sidebar in site.css
+   navigates by in page anchor, and the moment anything sets scroll-behavior
+   smooth, a visitor who asked for less motion gets a long animated scroll on
+   every category they click.
+
+   The universal selector is deliberate. scroll-behavior applies to whichever
+   element is the scroll container, and that can be html, body, or a scrollable
+   panel inside the page; naming one of them would miss the others. !important
+   because it has to beat whatever set it.
+
+   When a transition is first added in site.css, the house rule it has to follow:
+   .15s ease, and only on background-color, border-color or color. Never on
+   transform, opacity, width or height. */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}

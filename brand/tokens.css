@@ -1,0 +1,364 @@
+/* Copied one-way from tyler823/cortexfunnels brand/tokens.css,
+   which is itself a one-way copy from Job-Dox-Website index.css.
+   NEVER EDIT THIS FILE HERE. Changes flow in, never out. To change
+   a token, change it on the marketing site, then re-copy down the
+   chain. An edit made here is silently wiped by the next copy.
+   Copied: 2026-08-18. Source commit: 179f5122adc2c77231a8e0b8e89ac4581b063640 */
+:root{
+/* ── SURFACES ───────────────────────────────────────────────────────────────
+   Neutral near-black. Chunk 5A swapped these four to the product application's
+   dark ramp on the argument that one shared palette outranks hue purity on the
+   marketing site alone; that swap is reverted here. The ramp it borrowed is
+   built on a blue-violet base and reads cool at every step, and the site's own
+   grey ramp is what the brand red was chosen against. The product keeps its
+   ramp; the marketing site keeps its neutrals. This is a deliberate,
+   approved reversal — do not re-swap.
+
+   Grey channels only: every value below has R = G = B, so no surface can
+   contribute a cast under any blend or alpha composite. */
+--bg:#0a0a0a;
+--s1:#121212;
+--s2:#171717;
+--s3:#1f1f1f;
+/* ── TEXT ────────────────────────────────────────────────────────────────────
+   The neutral ramp, and the destination for every retired green, amber and
+   pink. Where hue used to separate two things, position, size, weight or a
+   hairline separates them now. Re-cut with the surfaces above so the ink ramp
+   and the surface ramp share one grey; R = G = B here too. */
+--t1:#f2f2f2;
+--t2:#9a9a9a;
+/* Was #4a4a4a, then #7a7a7a. Chunk 8 specified #4a4a4a from the ramp's spacing
+   rather than from a measurement, and #7a7a7a replaced it on a measurement taken
+   against --bg only: 4.61:1 there, which clears AA. But --t3 does not only sit on
+   --bg. It carries .rc-sl, .lb, .tr, .pd, .price-fine-print, .stacked-label,
+   .fc-cap and .id-label, and every one of those sits on a card, which is --s1,
+   --s2 or --s3. Measured against the real rendered background at 1440x900 and
+   380x740, that was 24 elements per viewport between 4.18:1 and 4.36:1 — the
+   single largest contrast failure on the page, and all of it invisible to a
+   check that only tests the page background.
+     #7a7a7a  bg 4.61  s1 4.36  s2 4.18  s3 3.84
+     #888888  bg 5.58  s1 5.28  s2 5.06  s3 4.65
+   #888888 is the first step up the same neutral axis that clears 4.5:1 on every
+   surface --t3 is used on, including --s3. R = G = B, so the no-cast rule holds. */
+--t3:#888888;
+/* ── HAIRLINES ───────────────────────────────────────────────────────────── */
+--br:rgba(var(--paper-rgb),.06);
+--br-hi:rgba(var(--paper-rgb),.1);
+/* ── ACCENT ──────────────────────────────────────────────────────────────────
+   One red: the brand red. --acc-rgb carries the same colour as bare channels
+   so every tint is one token, not twelve. --acc-lo is the 15% wash used for
+   soft accent fills; the second chart series uses a 45% step of the same
+   channels rather than a second hue. */
+--acc:#e43531;
+--acc-rgb:228,53,49;
+--acc-lo:rgba(var(--acc-rgb),.15);
+/* --acc-tx: THE SAME RED, LIGHTENED, FOR SMALL TEXT ON A TINTED WASH — AND FOR
+   NOTHING ELSE (chunk 14D).
+
+   THE DISTINCTION, because it is the thing that will get this wrong later:
+     --acc     is the brand red. It is what fills, large text, borders, chips,
+               icons, the constellation and every --acc-rgb tint are made of.
+               It does not change, anywhere, for any reason.
+     --acc-tx  is a TEXT-ONLY substitute, and only where red type under 24px
+               sits on a surface that is itself a red wash. Never as a fill,
+               never as a border, never on --bg, never on large text.
+
+   Why it is needed at all: --acc measures 4.57 on --bg, which clears AA for
+   small text with 0.07 of margin. Composite a 12-15% --acc-rgb wash under it
+   and the background lifts from rgb(10,10,10) toward rgb(43,16,16), the margin
+   is gone, and the same red fails. Four elements were in that position and
+   nothing except a lighter red fixes them without either removing the wash or
+   making the text non-red.
+
+   Why NOT to just lighten --acc globally: on --bg, #ef5b57 is a visibly
+   different, pinker red, and it would also change every fill, every border and
+   the constellation, which are all at or above their thresholds already and
+   were tuned to #e43531.
+
+   MEASURED, from composited pixels rather than from the tokens — see the four
+   call sites and the chunk 14 report for the before/after pairs. */
+--acc-tx:#ef5b57;
+/* ── NEUTRAL CHANNELS ────────────────────────────────────────────────────────
+   --white is label text sitting on an accent fill; it is deliberately off pure
+   white. --paper-rgb is the same colour as bare channels, for hairlines and the
+   hero grid.
+   --bg-rgb and --neutral-rgb are gone. They restated --bg and --t3 as channel
+   triples purely so the two could be used with alpha, which meant the same
+   colour was written down twice and a future edit to --bg or --t3 would have
+   silently left its triple behind. The alpha uses now derive from the tokens
+   themselves via color-mix, so there is one definition per colour. The two
+   backgrounds that would be unusable without alpha carry a plain-colour
+   fallback declaration ahead of the mix; the decorative shadows do not need
+   one. */
+--white:#fafafa;
+--paper-rgb:250,250,250;
+/* ── TYPE ────────────────────────────────────────────────────────────────────
+   ONE family. --ff (Google Sans Flex) carries everything on the page.
+
+   Google Sans Flex replaces Outfit. Outfit is a geometric sans whose lighter
+   weights go thin and even at display size, which is what let the 500 rule of
+   chunk 5B read as underset. Google Sans Flex holds a firmer stem at 700 and has
+   a taller x-height, so the same measure carries more ink at the same size. It
+   is a variable font on Google Fonts under the SIL Open Font License, free for
+   commercial use, and one file serves 400 through 700.
+
+   --fm IS NO LONGER A SECOND FAMILY. Space Mono is dropped (chunk 11B) and --fm
+   now resolves to the same stack as --ff. It is kept as a token rather than being
+   find-and-replaced away for two reasons: it is the single point that routes every
+   one of the 20 declarations that used to be mono, so there is one place to look;
+   and it still names a real distinction — --fm marks the figures and the small
+   uppercase labels, which is what --fw-mono-lb and --tnum below key off.
+
+   Mono was carrying two jobs and only ever did one of them well. It aligned
+   columns of figures, which mattered; and it flagged "this is measured", which a
+   second family is a heavy way to say. Google Sans Flex has a real tabular figure
+   set — measured, see --tnum — so the alignment job survives the swap intact, and
+   the flagging job moves to weight and tracking. */
+--ff:'Google Sans Flex','Google Sans','GSF Fallback Adj MS','GSF Fallback Adj',system-ui,-apple-system,'Segoe UI',sans-serif;
+--fm:'Google Sans Flex','Google Sans','GSF Fallback Adj MS','GSF Fallback Adj',system-ui,-apple-system,'Segoe UI',sans-serif;
+/* Tabular figures, as a token so every figure on the page opts in the same way.
+   VERIFIED BY MEASUREMENT, not assumed. Rendered width of a single glyph at 100px
+   in Google Sans Flex, all ten digits:
+     default (proportional)  36.75 - 64.50px, a 27.75px spread
+     tabular-nums                    64.50px flat, spread 0
+   And on a string the calculator actually produces:
+     "$1,111,111" vs "$8,888,888"  default 339.75 vs 493.50px  (153.75px apart)
+                                   tnum    580.50 vs 580.50px  (identical)
+   font-feature-settings:"tnum" gives byte-identical results, so the standard
+   property is enough and the fallback is not needed. No fixed-width container is
+   needed either. Without this the savings figures would jump by up to 150px as a
+   slider moves, which is exactly the jitter mono existed to prevent. */
+--tnum:tabular-nums;
+/* ── TYPE WEIGHT ─────────────────────────────────────────────────────────────
+   Every font-weight on the page routes through one of these six. There are no
+   literal font-weight values left in index.css or in index.html.
+
+   Chunk 5B set all three display steps to 500 on the principle that hierarchy
+   should come from scale and negative tracking alone. That principle came from
+   an airy editorial reference and is wrong for this brand: the page is meant to
+   read as a precision instrument, and at 500 the display type read thin and the
+   sections lost their top. Weight is back in the hierarchy. This is a
+   deliberate, approved reversal — do not re-flatten these to one value.
+
+   --fw-ui is the one step that is neither display nor body: 14-18px UI labels
+   and proper names (nav items, the hero badge, an integration name, a
+   testimonial byline). They were 500 before this chunk and stay 500, because
+   they are not display type and the reversal above is about display type. */
+--fw-display:700;                                /* hero, section headline */
+--fw-sub:600;                                    /* subsection + card titles */
+--fw-cta:700;                                    /* CTA label */
+--fw-ui:500;                                     /* small UI label, proper name */
+--fw-body:400;                                   /* body, caption */
+--fw-mono-em:700;                                /* figure chip sitting on a fill */
+/* Small uppercase labels. They were --fw-body (400) while they were set in Space
+   Mono, whose 400 is already a dense, even colour at 11-13px. Google Sans Flex at
+   400 and 11px with 0.12em tracking reads noticeably lighter than the mono it
+   replaces — the letterforms are narrower and the counters more open, so the same
+   weight puts less ink on the line. 600 restores the label's presence at the same
+   size, tracking and casing, which is what chunk 11B asks for. Not 700: 700 is
+   --fw-mono-em, which is reserved for a figure chip sitting on a solid fill and
+   has to hold against --acc. */
+--fw-mono-lb:600;                                /* small uppercase label */
+/* ── FIGURE WEIGHT AND WIDTH (chunk 14A) ─────────────────────────────────────
+   Every large figure on the page rendered at 400 while display type sat at 700,
+   so .roi-sub — a 23px supporting sentence at --fw-sub 600 — was heavier than
+   the 72px $54,250 figure it exists to support.
+
+   DIAGNOSIS, CONFIRMED. The cause is the one chunk 14 proposed. Space Mono
+   shipped 400 and 700 only, and at 400 its numerals are already a dense, even
+   colour, so a figure set in mono at 400 read as a figure. When chunk 11B
+   dropped Space Mono and pointed --fm at Google Sans Flex, the twenty
+   declarations that moved carried their weight values across unchanged. Every
+   one of them said --fw-body. Google Sans Flex at 400 is a text weight, not a
+   figure weight, so all twenty went light at once and none of them picked up a
+   display token, because until now there was no figure weight token to pick up.
+   This is the same failure --fw-mono-lb already fixed for the small uppercase
+   labels in that chunk; it was fixed for the labels and missed for the figures.
+
+   WHAT THE FONT ACTUALLY EXPOSES. Read from the fvar table of the binary
+   Google serves, then confirmed on rendered text in the browser:
+     wght  1-1000   (default 400)   -- requested 400..800, arrives as 400-1000
+     wdth  25-151   (default 100)   -- NOT requested, pinned at 100
+     opsz  6-144    (default 18)    -- not requested, pinned at 18
+     ROND  0-100    (default 0)     -- not requested, pinned at 0
+   Only what the css2 URL asks for is in the binary, which is why a wdth value
+   set here would be silently inert. There is no --vs-metric token any more, and
+   adding one back without also adding the axis to the URL in index.html would
+   change nothing on screen.
+
+   THE VALUES, and why these.
+   800 on the largest figures, 700 on the rest. 800 puts 30.055% ink on
+   "$54,250" at 72px against 700's 27.194%, +10.5%, which is the step that makes
+   the figure outweigh the sentence under it. Nothing goes above 800: the axis
+   runs to 1000 but 900 and 1000 are display-poster weights that would make the
+   figures louder than the h1.
+
+   THE WIDTH AXIS WAS REVERTED IN 15C, and this is the argument, because the
+   design case for it was real. Chunk 14A set the figures at wdth 110, which
+   widened them 12.0%, on the reasoning that "the numerals read narrow" is
+   literally a width problem and that weight and width do two different jobs —
+   weight supplies density, width supplies presence. That reasoning still holds.
+   What it cost is 26,540 B on the latin subset, +69.1%, for seventeen figures.
+   Weight 800 and the tracking below had already answered the complaint on their
+   own; the width was a refinement stacked on a fix that had landed. On a phone
+   on a job site that trade does not pay. If it is ever revisited, note that
+   widening LOWERS ink coverage (30.055% at wdth 100, 28.86% at 110) because the
+   glyph box grows faster than the stroke does, so it is not a way to get weight.
+
+   Tracking tightens with size. Heavy numerals at loose tracking read as a
+   billboard; the intent is a gauge face or a spec plate, which is heavy and
+   tight. --tr-metric stays -.02em for the 12-13px chart figures that also
+   use it, where -.04em would close them up. */
+--fw-metric:700;                                 /* figures at --fs-metric */
+--fw-metric-xl:800;                              /* --fs-metric-lg and -xl */
+--tr-metric-md:-.03em;                           /* figures at --fs-metric */
+--tr-metric-xl:-.04em;                           /* --fs-metric-lg and -xl */
+/* ── TYPE SCALE ──────────────────────────────────────────────────────────────
+   Every font-size on the page routes through one of these. There are no literal
+   font-size values left in index.css or in index.html.
+
+   Hierarchy comes from size, tracking AND weight. Sizes pair with the weight
+   tokens above: display and section headline take --fw-display, subsection and
+   card titles --fw-sub, body and captions --fw-body.
+
+   Each clamp floor is the 380px value and each ceiling the 1440px value, so the
+   scale is fluid between them and needs no size-specific overrides. The display
+   step floors at 40px, inside the 44px ceiling the brief sets for 380px. */
+/* 54px, below the brief's 60-72px display band, because measurement requires it
+   and the brief allows going under when it does. Google Sans Flex is a wider face
+   than Outfit — the headline sets 39.52em on one line at 700/-0.035em against
+   Outfit's 32.87em at 500/-0.03em, +20.2% — so the same 1152px container holds a
+   noticeably smaller size at two lines.
+
+   Swept on the live element at 1440px in 1px steps. Two lines survive to 58px and
+   break to three at 59px, so 58px is the hard ceiling, not 64px as it was under
+   Outfit. Slack on the widest line at each candidate: 58px leaves 10.7px (0.9%),
+   57px 30.3px (2.6%), 56px 50.0px (4.3%), 55px 69.7px (6.1%), 54px 89.4px (7.8%).
+   54px is taken because it is the first step that clears the ~7% headroom this
+   file already committed to for exactly this risk — a platform whose rasterisation
+   rounds differently must not be able to tip line two into a third. 52px and 53px
+   buy more room but cost size for no additional safety.
+
+   It stays clearly above --fs-h2's 50px, so the hero headline is still the largest
+   language type on the page. 3.8vw rather than 4.2vw so the ceiling still binds
+   before 1440px (it binds at 1421px) and the step tracks the shrinking container
+   below that.
+
+   FLOOR 40px -> 38px, chunk 10A. Swept on the live element at 380x740 with the real
+   font binaries served (Google Fonts is blocked in this sandbox and a substitute face
+   invalidates every line count). Headline line count and the primary CTA's bottom edge
+   against the 740px fold, at each candidate:
+
+     40px  7 lines  CTA bottom 1089.9  (349.9 below the fold)   <- was shipping
+     38px  5 lines  CTA bottom  994.5  (254.5 below)            <- now shipping
+     36px  5 lines  CTA bottom  983.9  (243.9 below)
+     32px  5 lines  CTA bottom  962.7  (222.7 below)
+     30px  4 lines  CTA bottom  920.3  (180.3 below)
+     24px  4 lines  CTA bottom  894.9  (154.9 below)
+     22px  3 lines  CTA bottom  863.1  (123.1 below)
+     18px  3 lines  CTA bottom  850.4  (110.4 below)
+     16px  2 lines  CTA bottom  827.0  ( 87.0 below)
+
+   NO display size puts the CTA above the fold, and none can. The headline occupies
+   296.7px of the 349.9px deficit at 40px, so even a headline of zero height leaves the
+   CTA at 793.2px — still 53.2px below. The binding constraint is not the headline: it
+   is .hero-d, which sets 900 characters as 17 lines and 504.7px at this width, 68% of
+   the fold on its own. That is a copy-length decision, not a type-scale one, and it is
+   out of this chunk's scope.
+
+   38px is taken because 40 -> 38 is a genuine two-line cliff (7 -> 5 lines, 95.4px
+   recovered) for a 5% size reduction. Every step below 38 buys far less per pixel
+   surrendered and none of them reaches the goal, so there is no measurement requiring
+   them. Still inside the v2 scale's 44px mobile display cap.
+
+   CEILING 54 -> 58, SLOPE 3.8vw -> 4.8vw (chunk 20). The headline is 32 characters
+   now instead of 86 and sits in a 575.7px track, so the size is set by the longer of
+   its two lines rather than by the fold. MEASURED on the real face, "operations
+   manager." at 1440x900:
+     56px  533.44   58px  553.77   60px  574.11   64px  614.77
+   The track is 575.7px, so 60px is the last size that fits and it fits by 1.59px.
+   58px is taken instead: it clears by 21.9px, which is the margin that survives the
+   hinting differences between platforms, and 60px would sit only 8px under the 50px
+   section headline once .stitle is at its own ceiling. 4.8vw holds the same
+   one-line-fits relationship down the range — at 1025px the track is 488.5px and
+   49.2px sets the second line at 468.9px — and the 38px floor is unchanged, so
+   nothing about the mobile step moves. Only .hero-t consumes this token. */
+--fs-display:clamp(2.375rem,4.8vw,3.625rem);     /* 38 -> 58  hero */
+/* 50px, down from 52px, to sit inside the brief's 40-50px section band. 3.85vw
+   keeps the ceiling binding before 1440px. Google Sans Flex at 700/-0.025em sets
+   the longest section headline at 1154.3px against the 1152px container, so the
+   two longest headlines take a second line here where Outfit at 500 held them on
+   one — that is the bulk of the page-height growth this chunk adds. */
+--fs-h2:clamp(2rem,3.85vw,3.125rem);             /* 32 -> 50  section headline */
+--fs-h3:clamp(1.5rem,2.2vw,1.875rem);            /* 24 -> 30  subsection */
+--fs-h4:clamp(1.25rem,1.6vw,1.5rem);             /* 20 -> 23  card title */
+--fs-body:1.125rem;                              /* 18       body */
+--fs-small:.875rem;                              /* 14       small / caption */
+/* CTA labels. WCAG's large-text exemption, which drops the threshold to 3:1 and
+   lets --white stay on --acc, starts at 18pt (24px) or 14pt bold (18.66px). 18px
+   is a third of a pixel short of that at bold, so the step stays 19px — it
+   satisfies the 18px minimum and clears 18.66px.
+
+   CLOSED in chunk 9. The exemption needs 18.66px *and bold*, and --fw-cta was
+   600, which is semibold. At 19px/700 the label is large text and --white on
+   --acc passes on 3:1 (measured 4.15). At 19px/600 it was no longer large text,
+   so the same pairing was judged against 4.5:1 and 4.15 failed. The size half
+   of the reasoning above always held; the weight half did not. --fw-cta is now
+   700, which restores the pass and changes nothing else. */
+--fs-cta:1.1875rem;                              /* 19       CTA label */
+/* Mono steps. The metric ladder is what carries the figures now that chunk 4
+   removed their gradients: scale does the work colour used to do. */
+--fs-metric-xl:clamp(2.75rem,5vw,4.5rem);        /* 44 -> 72  the $54,250 figure */
+--fs-metric-lg:clamp(2.25rem,3.2vw,3rem);        /* 36 -> 48  price, grand total */
+--fs-metric:clamp(1.5rem,2vw,1.75rem);           /* 24 -> 28  calculator figures */
+--fs-metric-sm:1.125rem;                         /* 18       table values */
+--fs-mono:.8125rem;                              /* 13       mono label */
+--fs-mono-sm:.75rem;                             /* 12       small label */
+/* 10px, and it exists for exactly one place: the stacked chart's totals and x-axis
+   labels below 480px, where 12px does not fit the column the viewport allows. See
+   the D1 block for the measurement that sets it. */
+--fs-mono-xs:.625rem;                            /* 10       chart label, <480px */
+/* Glyph sizes. These size an icon, not text, and are kept apart from the type
+   scale for that reason. The icon chunk replaces the glyphs they size. */
+--fs-glyph-xl:2rem;
+--fs-glyph:1.375rem;
+--fs-glyph-sm:.8125rem;
+--fs-glyph-close:2.5rem;
+/* ── ICONS ───────────────────────────────────────────────────────────────────
+   One family: Tabler outline, inlined as <svg>, no package and no CDN. Every
+   glyph is stroke-width 1.75 on a 24x24 box with stroke:currentColor and
+   fill:none, so an icon takes its colour from whatever token its container
+   already uses and cannot introduce an off-palette value.
+   Three glyphs live on pseudo-elements, where an <svg> child is impossible.
+   Those use the same Tabler path as a mask: a mask samples alpha only, so the
+   #fff stroke inside the data URI is never painted — the paint comes from
+   background-color:currentColor, which keeps the same token inheritance the
+   inline icons get. */
+--ic-arrow-right:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l14 0'/%3E%3Cpath d='M13 18l6 -6'/%3E%3Cpath d='M13 6l6 6'/%3E%3C/svg%3E");
+--ic-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5l10 -10'/%3E%3C/svg%3E");
+/* ── TRACKING ────────────────────────────────────────────────────────────────
+   Negative on display type, where it does the job weight used to do; positive
+   only on mono labels, where the wide advance needs it. */
+--tr-display:-.035em;
+--tr-h2:-.025em;
+--tr-h3:-.015em;
+--tr-metric:-.02em;
+--tr-mono:.14em;
+/* ── LINE HEIGHT ─────────────────────────────────────────────────────────── */
+--lh-display:1.06;
+--lh-h2:1.1;
+--lh-h3:1.25;
+--lh-body:1.65;
+--lh-mono:1.4;
+/* ── RADIUS ──────────────────────────────────────────────────────────────────
+   Three steps, and nothing else. Every radius on the page routes through one of
+   these three tokens. --rd-0 is hairline-bounded blocks, full-bleed panels,
+   section dividers and image frames. --rd is contained elements: buttons,
+   inputs, pricing tier cards, modals. --rd-pill is chips, badges, small tags
+   and toggles. The one thing that stays a literal is 50% on a true circle
+   (avatars, the AI orb, dots, slider thumbs) — that is geometry, not a radius
+   choice, and it does not belong on this scale. */
+--rd-0:0;
+--rd:10px;
+--rd-pill:9999px
+}
