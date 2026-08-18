@@ -252,6 +252,33 @@
     currentLink = link;
   }
 
+  /* NOTHING IS IN THE BAND AT SCROLL TOP, so without this the sidebar loads with
+     no category marked at all, which reads as broken rather than as neutral. The
+     band sits 10 to 20 percent down the viewport and the first heading is below
+     it on arrival, under the eyebrow, the title and the intro paragraph, so the
+     observer's own opening callback correctly reports nothing intersecting and
+     correctly does nothing.
+
+     FIRST VISIBLE, NOT HARDCODED to the projects section: if a section is ever
+     removed, or the search box arrives holding a restored value that hides the
+     early sections, the mark still lands on something the reader can see.
+
+     Guarded on currentLink so this can never fight the observer. It only ever
+     fills a vacuum. If a deep link scrolled the page to a heading before this
+     ran, the observer will have set a link already and this returns untouched;
+     if it runs first, the observer's next callback overrides it in the normal
+     way, because setCurrent moves the class rather than adding a second one. */
+  function markFirstVisible() {
+    if (currentLink) return;
+
+    for (var i = 0; i < GROUPS.length; i++) {
+      if (!GROUPS[i].section.hidden) {
+        setCurrent(GROUPS[i]);
+        return;
+      }
+    }
+  }
+
   if (typeof IntersectionObserver === 'function' && GROUPS.length) {
     /* The band runs from 10 percent to 20 percent down the viewport: the top
        margin pulls the root box down by 10 percent and the bottom margin pulls
@@ -303,4 +330,9 @@
      navigation would otherwise leave the box holding a query while every card
      was still on screen. */
   applyFilter();
+
+  /* After applyFilter, deliberately. If a restored query has hidden the early
+     sections, first visible has to mean first still on screen, not first in the
+     document. */
+  markFirstVisible();
 }());
