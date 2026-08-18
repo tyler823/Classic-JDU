@@ -1,0 +1,383 @@
+/* SITE. Page specific layout for the guides page.
+
+   Everything shared with a hypothetical second page is in shell.css: the reset,
+   the document rules, the hidden attribute, the focus ring, the screen reader
+   helper, the header bar, the wordmark and the footer. What is here is the two
+   column frame, the sidebar, and the card grid. If any of it turns out to be
+   needed by a second page, it moves up to shell.css rather than being copied.
+
+   TOKENS ONLY, same as shell.css. Not one literal colour, font size, font
+   weight, letter spacing, line height or border radius in this file. Spacing is
+   in rem and steps in quarters, because tokens.css carries no spacing tokens.
+
+   NO BOX SHADOW. Depth is the surface ramp plus 1px hairlines. Transitions are
+   .15s ease and only ever on background-color, border-color or color; nothing
+   here transitions transform, opacity, width or height.
+
+   No @supports, no container queries, and every media query is max-width. The
+   type scale does the fluid work on its own: six of its steps are clamp() based
+   and already fluid from 380px to 1440px, so no breakpoint below changes a font
+   size. A layout that only fits because its type shrank is a layout that does
+   not fit. */
+
+/* ── PAGE FRAME ───────────────────────────────────────────────────────────── */
+
+/* Two columns: a fixed sidebar track and the main column taking what is left.
+   17rem is set by the longest category name plus the sidebar's own padding, and
+   it is fixed rather than fractional because a nav column that grows with the
+   viewport puts the guide cards further from the eye on a wide screen for no
+   gain. */
+.layout {
+  display: grid;
+  grid-template-columns: 17rem 1fr;
+}
+
+/* STICKY, NOT FIXED, and the difference is the whole reason this works.
+
+   A fixed sidebar leaves the document flow, so the main column has to be pushed
+   clear of it with a margin or a padding that duplicates this width, and the two
+   numbers then have to be kept in step by hand forever. Sticky stays a grid
+   item: the track reserves its space, so the main column needs no compensation
+   at all and there is one width in this file rather than two.
+
+   height 100vh with overflow-y auto is what lets a long category list scroll
+   inside the sidebar instead of scrolling the page. top 0 rather than an offset
+   below the header, because the header is not sticky (see shell.css) and an
+   offset would have to track the header's padding. */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--br);
+  padding: 1.5rem 1.25rem;
+}
+
+/* min-width 0 IS MANDATORY, NOT DEFENSIVE. A grid item's automatic minimum size
+   is its min-content size, and this item contains a grid of its own whose cards
+   hold long unbroken guide titles and URLs. Without this the inner content's
+   min-content width wins over the 1fr track and pushes the column wider than its
+   share, which widens the page and produces a horizontal scrollbar. Same class
+   of trap as the min-width on the form inputs in cortexfunnels, and it bites
+   here for the same reason: an intrinsic minimum beats a flexible track. */
+.main {
+  padding: 2.5rem 2rem 4rem;
+  min-width: 0;
+}
+
+/* ── SEARCH ───────────────────────────────────────────────────────────────── */
+
+/* THE FIELD SITS ON --s2 WHILE THE CARDS SIT ON --s1. That inversion is
+   deliberate and it is the system's convention: an input is one surface step
+   brighter than a card, and it takes the brighter hairline --br-hi where a card
+   takes --br. It reads as a well you can type into rather than as another card.
+   Do not normalise the two to one surface.
+
+   --lh-mono ON AN INPUT LOOKS WRONG AND IS NOT. It is what every text input in
+   cortexfunnels uses, and it is what gives the field its height: a body line
+   height would make the box noticeably taller than the padding implies. Copied
+   deliberately, not inherited by accident.
+
+   min-width 0 for the same reason as .main above: an input carries an intrinsic
+   width of about twenty characters, roughly 13rem, and that floor would beat the
+   width 100% and overflow the sidebar's padding.
+
+   The margin is the only spacing between the field and the category list, which
+   is why it is on the input rather than on the list: the list has no padding by
+   design and giving it a top margin would also space the pills away from the
+   field on mobile, where they sit in a row rather than a column. */
+.search-input {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 1.5rem;
+  padding: .875rem 1rem;
+  background: var(--s2);
+  color: var(--t1);
+  border: 1px solid var(--br-hi);
+  border-radius: var(--rd);
+  font-family: var(--ff);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-body);
+  line-height: var(--lh-mono);
+}
+
+.search-input::placeholder { color: var(--t3); }
+
+/* BOTH THIS AND THE GLOBAL RING FIRE, AND THAT IS INTENDED. shell.css puts a 2px
+   --acc outline on anything focus-visible; this turns the field's own hairline
+   accent at the same time. The ring says which element has focus, the border
+   says the field is live. Neither replaces the other, and there is no
+   outline: none here or anywhere. */
+.search-input:focus-visible { border-color: var(--acc); }
+
+/* ── CATEGORY LIST ────────────────────────────────────────────────────────── */
+
+.cat-list {
+  list-style: none;
+  padding: 0;
+}
+
+/* display block so the whole row is the click target rather than just the words,
+   which matters most on the mobile pill layout where a mistimed tap otherwise
+   lands between two items. */
+.cat-item {
+  display: block;
+  padding: .5rem .75rem;
+  border-radius: var(--rd);
+  color: var(--t2);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-ui);
+  text-decoration: none;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+/* Hover moves the ink only. No fill, so hover and current stay clearly
+   different: one is a hint, the other is state. */
+.cat-item:hover { color: var(--t1); }
+
+/* THE SYSTEM'S ONLY HIGHLIGHT PAIRING: --acc text on an --acc-lo wash. It is the
+   same treatment cortexfunnels uses on a chosen option and on the flagged score
+   card. Do not invent a second one, and do not reach for a border here: the
+   wash is the signal.
+
+   is-current is toggled by app.js, which watches which section is in view. It is
+   defined now so that script has something to switch on rather than inventing a
+   class of its own later. */
+.cat-item.is-current {
+  color: var(--acc);
+  background: var(--acc-lo);
+}
+
+/* ── PAGE HERO ────────────────────────────────────────────────────────────── */
+
+.page-eyebrow {
+  font-size: var(--fs-mono-sm);
+  font-weight: var(--fw-mono-lb);
+  letter-spacing: var(--tr-mono);
+  line-height: var(--lh-mono);
+  text-transform: uppercase;
+  color: var(--acc);
+}
+
+/* --fs-h2, NOT --fs-display, AND THIS IS A MEASUREMENT DECISION RATHER THAN A
+   TASTE ONE.
+
+   --fs-display ceilings at 58px, and that 58 was fitted by sweeping the real
+   font against a 1152px container on the marketing site: 60px was the last size
+   that fitted and it fitted by 1.59px, so 58 was taken for the margin that
+   survives platform hinting. This page's main column is narrower than that
+   container, because a 17rem sidebar and 2rem of padding come off the top of it
+   before any text is set. The fit argument therefore does not transfer, and
+   58px here would set too large for the measure it has.
+
+   --fs-h2 ceilings at 50px, which does fit. Both steps take --fw-display, so
+   dropping one step in the scale costs the title nothing in weight. */
+.page-title {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-display);
+  letter-spacing: var(--tr-h2);
+  line-height: var(--lh-h2);
+  color: var(--t1);
+}
+
+/* --t2 rather than --t1 so the title stays the brightest thing in the hero, and
+   a 34rem measure rather than the full column so the intro reads as a paragraph
+   instead of a banner. 34rem is the measure the funnels hold their body copy to
+   for the same reason. */
+.page-intro {
+  color: var(--t2);
+  max-width: 34rem;
+}
+
+/* ── SECTION HEADINGS ─────────────────────────────────────────────────────── */
+
+/* scroll-margin-top IS LOAD BEARING, NOT POLISH. Every category link jumps to
+   one of these headings. Without it the heading lands flush against the top edge
+   of the viewport, with its first line touching the browser chrome and no
+   indication that there is content above it. 1.5rem is enough to read as a gap
+   without pushing the heading down far enough to look misaligned.
+
+   The asymmetric margin is on purpose: a section needs clear air above it to
+   separate it from the cards of the section before, and much less below it
+   because its own grid follows immediately. */
+.section-head {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-sub);
+  letter-spacing: var(--tr-h3);
+  line-height: var(--lh-h3);
+  color: var(--t1);
+  margin: 2.5rem 0 1rem;
+  scroll-margin-top: 1.5rem;
+}
+
+/* ── CARD GRID ────────────────────────────────────────────────────────────── */
+
+/* NO max-width ON THIS GRID, DELIBERATELY. The page this content came from
+   capped the same grid at 680px inside a 756px content box with no centring, so
+   it sat flush left with roughly 76px of dead space beside it at full width.
+   That was a bug that survived because nobody wrote down that it was one. The
+   grid fills the column it is given. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+}
+
+/* ── CARD ─────────────────────────────────────────────────────────────────── */
+
+/* THE CARD IS THE ANCHOR. Not a div with a click handler, which is what the old
+   page used: 41 divs with onclick, no href, no tabindex and no focus style, so
+   not one of them was reachable by keyboard and none of them supported
+   middle click, open in new tab, or copy link. Making the card an <a> restores
+   all of that for free and needs no script at all.
+
+   HOVER CHANGES EXACTLY ONE PROPERTY. The old page also animated a -3px
+   translateY lift on hover; that is not carried across. No transform, no fill
+   change, no shadow. The border going accent is the whole affordance, and it is
+   enough because the border is the only thing separating the card from the
+   ground it sits on. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  padding: 1.125rem;
+  background: var(--s1);
+  border: 1px solid var(--br);
+  border-radius: var(--rd);
+  text-decoration: none;
+  transition: border-color .15s ease;
+}
+
+.card:hover { border-color: var(--acc); }
+
+/* The icon is an inline SVG with stroke="currentColor" and fill="none", so
+   setting color on this element is what paints it and it can never carry an off
+   palette value. Sizing it from --fs-glyph rather than a literal keeps it on the
+   scale: that token is 1.375rem, exists for exactly this, and is consumed
+   nowhere else in the token set, so this is its home.
+
+   flex 0 0 auto because the card is a flex column and an SVG given a free basis
+   will stretch to the column width. */
+.card-icon {
+  width: var(--fs-glyph);
+  height: var(--fs-glyph);
+  color: var(--t3);
+  flex: 0 0 auto;
+  transition: color .15s ease;
+}
+
+/* The icon brightens with the border, so one hover reads as one gesture rather
+   than two things happening at once. */
+.card:hover .card-icon { color: var(--acc); }
+
+/* --lh-h3 rather than a body line height: these titles run to two and three
+   lines in a narrow card, and body leading at this size opens them up enough to
+   read as separate lines rather than as one title. */
+.card-title {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-sub);
+  line-height: var(--lh-h3);
+  color: var(--t1);
+}
+
+/* ── MOBILE BADGE ─────────────────────────────────────────────────────────── */
+
+/* --acc-tx, AND THIS IS THE ONE JOB IT EXISTS FOR. Read its contract in
+   tokens.css before using it anywhere else, because anywhere else is wrong.
+
+   The rule, restated so it is in front of whoever edits this next: --acc-tx is a
+   TEXT ONLY substitute for --acc, and only where red type under 24px sits on a
+   surface that is itself a red wash. Never as a fill. Never as a border. Never
+   on --bg. Never on large text. The reason is measured upstream: --acc clears AA
+   on --bg by 0.07, and compositing a 15% --acc-rgb wash under it lifts the
+   background from rgb(10,10,10) toward rgb(43,16,16), which spends that margin
+   and fails the same red. This badge is exactly that case, so it takes --acc-tx
+   while the eyebrow and the current category, which sit on --bg and on the wash
+   respectively at their own sizes, take --acc.
+
+   inline-block rather than inline so the padding produces a real box, and the
+   left margin rather than a gap because the badge follows the title text inside
+   the same line box. */
+.card-badge {
+  display: inline-block;
+  margin-left: .375rem;
+  padding: .125rem .4375rem;
+  background: var(--acc-lo);
+  color: var(--acc-tx);
+  border-radius: var(--rd-pill);
+  font-size: var(--fs-mono-sm);
+  font-weight: var(--fw-mono-lb);
+  letter-spacing: var(--tr-mono);
+  line-height: var(--lh-mono);
+  text-transform: uppercase;
+}
+
+/* ── NO RESULTS ───────────────────────────────────────────────────────────── */
+
+/* Ships with the hidden attribute and is revealed by app.js when a search
+   matches nothing. It needs no display rule of its own: shell.css carries
+   [hidden] { display: none !important; }, and that !important is what stops any
+   rule here putting the element back on screen. */
+.no-results {
+  color: var(--t3);
+  font-size: var(--fs-small);
+  padding: 2rem 0;
+}
+
+/* ── 1024px ───────────────────────────────────────────────────────────────── */
+
+/* THE REAL TWO COLUMN STEP, AND IT IS THE POINT OF HAVING THREE BREAKPOINTS.
+   The old page went from three columns straight to one at 768px, so a card was
+   about 217px wide at 781px and about 668px wide at 767px. A single pixel of
+   viewport tripled the card width. That jump was the most visible artefact in
+   the old layout and this step is what removes it. */
+@media (max-width: 64rem) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── 768px ────────────────────────────────────────────────────────────────── */
+
+/* THE SIDEBAR STOPS BEING A SIDEBAR AND BECOMES A BLOCK OF PILLS ABOVE THE
+   CONTENT. There is deliberately no hamburger, no drawer and no off canvas
+   panel. This reflow needs zero JavaScript, which means there is no state to get
+   stuck in, no aria-expanded to keep truthful, no focus trap to build, and
+   nothing that can break. A nav that is always visible cannot fail to open.
+
+   Every property that made it a sidebar has to be undone explicitly. sticky with
+   a 100vh height would otherwise pin a full screen of nav above the first card,
+   and the right border would draw a rule down the middle of nothing. */
+@media (max-width: 48rem) {
+  .layout { grid-template-columns: 1fr; }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    overflow: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--br);
+  }
+
+  /* A wrapping row rather than a column. The gap is tighter than the desktop
+     list's padding because pills carry their own visual separation. */
+  .cat-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .375rem;
+  }
+
+  /* --rd-pill so the row reads as pills. At --rd the items look like truncated
+     bars sitting next to each other, which reads as a broken table rather than
+     as a set of choices. */
+  .cat-item { border-radius: var(--rd-pill); }
+
+  .main { padding: 2rem 1.25rem 3rem; }
+}
+
+/* ── 480px ────────────────────────────────────────────────────────────────── */
+
+/* One card per row. 30rem is the funnels' only breakpoint, taken deliberately
+   rather than recomputed, so a visitor turning a phone between this site and a
+   funnel page meets the same stacking width on both. */
+@media (max-width: 30rem) {
+  .card-grid { grid-template-columns: 1fr; }
+}
