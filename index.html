@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>JobDox Classic Training Guides | JobDox University</title>
+<meta name="description" content="Step by step guides and video walkthroughs for JobDox Classic, covering projects, budgets, users, settings, reporting, field operations and drying.">
+
+<link rel="canonical" href="https://classic.job-dox.ai/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://classic.job-dox.ai/">
+<meta property="og:site_name" content="JobDox University">
+<meta property="og:title" content="JobDox Classic Training Guides">
+<meta property="og:description" content="Step by step guides and video walkthroughs for JobDox Classic, covering projects, budgets, users, settings, reporting, field operations and drying.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JobDox Classic Training Guides">
+<meta name="twitter:description" content="Step by step guides and video walkthroughs for JobDox Classic, covering projects, budgets, users, settings, reporting, field operations and drying.">
+
+<!-- NO og:image AND NO twitter:image, DELIBERATELY, AND THE CARD TYPE IS summary
+     RATHER THAN summary_large_image BECAUSE OF IT.
+
+     There is no raster image in this repository, and no social platform renders
+     an SVG as a card. A declared image that never resolves is worse than
+     declaring none: the reader gets a broken card slot instead of a clean text
+     card. The marketing site shipped exactly that and every shared link posted
+     with no preview at all until a real 1200x630 raster replaced it.
+
+     summary is the honest card until such a raster exists. When one does, add
+     both tags and change the card type in the same edit. -->
+
+<!-- NO FAVICON LINK, AND THAT IS A DECISION RATHER THAN AN OVERSIGHT.
+
+     Every icon file that exists anywhere in this project family carries the
+     current platform mark, and putting that mark in a Classic browser tab is
+     the precise contamination this site exists to remove. An iconless tab is
+     the correct state until a Classic mark is drawn for it. Do not borrow the
+     other product asset to fill the gap. -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- wght@400..800 IS A VARIABLE AXIS RANGE, NOT A WEIGHT LIST. One file serves
+     every weight from 400 to 800. Do not expand it to a semicolon separated
+     list, which would fetch static instances instead, and do not add axes:
+     only what this URL asks for is present in the served binary, so a wdth or
+     opsz value set in CSS would be silently inert. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..800&amp;display=swap">
+
+<!-- ORDER IS LOAD BEARING. tokens.css defines the custom properties that
+     shell.css and site.css read, so it has to be parsed before either of them.
+     Link it second and every colour and size on the page resolves to nothing. -->
+<link rel="stylesheet" href="/brand/tokens.css">
+<link rel="stylesheet" href="/shell.css">
+<link rel="stylesheet" href="/site.css">
+</head>
+
+<body>
+
+<header class="site-head">
+  <div class="wordmark">
+    <span class="wordmark-name">JobDox University</span>
+    <span class="wordmark-tag">Classic</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+
+    <!-- A REAL LABEL, IN THE MARKUP, WITH A REAL for POINTING AT A REAL id.
+         The visible cue is the placeholder and the label is visually hidden,
+         which is the treatment the funnels use. The text stays here rather than
+         being written by script: this page is painted before app.js runs and
+         reads fine without it, so a label filled in later would leave the field
+         with no accessible name at all in the window before the script arrives,
+         and permanently for anyone whose script never does. -->
+    <label class="visually-hidden" for="search-input">Search guides</label>
+    <input type="search" id="search-input" class="search-input" placeholder="Search guides" autocomplete="off">
+
+    <nav aria-label="Guide categories">
+      <ul class="cat-list">
+        <li><a class="cat-item" href="#cl-projects">Projects</a></li>
+        <li><a class="cat-item" href="#cl-budget">Budget &amp; Billing</a></li>
+        <li><a class="cat-item" href="#cl-users">Users &amp; Access</a></li>
+        <li><a class="cat-item" href="#cl-settings">Settings &amp; Configuration</a></li>
+        <li><a class="cat-item" href="#cl-reporting">Reporting &amp; Search</a></li>
+        <li><a class="cat-item" href="#cl-fieldops">Field Operations &amp; Time Tracking</a></li>
+        <li><a class="cat-item" href="#cl-drying">Drying</a></li>
+        <li><a class="cat-item" href="#cl-videos">Video Tutorials</a></li>
+      </ul>
+    </nav>
+
+  </aside>
+
+  <main class="main" id="main">
+
+    <p class="page-eyebrow">JobDox Classic</p>
+    <h1 class="page-title">Training Guides</h1>
+    <p class="page-intro">Every step by step guide and video walkthrough for JobDox Classic, grouped by the part of the product it covers. Each one opens in a new tab.</p>
+
+    <!-- Ships hidden and is revealed by app.js when a search matches nothing.
+         shell.css carries [hidden] { display: none !important; }, so no display
+         rule is needed here and none should be added. -->
+    <p class="no-results" id="no-results" hidden>No guides match that search. Try a shorter word, or clear the box to see all 41 guides.</p>
+
+    <section>
+      <h2 class="section-head" id="cl-projects">Projects</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/How_to_Create_a_New_Job_on_JobDox__tEjpMvR7QSSh9E_PJ5vJfw?referrer=documents" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M12 11v6"/><path d="M9 14h6"/></svg>
+          <span class="card-title">How to Create a New Job</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Delete_a_Project_in_JobDox__Ge3XocNtQ1Ko62xxK0TP0w" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/></svg>
+          <span class="card-title">How to Delete a Project</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Access_view_and_navigate_through_a_dashboard_interface__Rms_cPDsTk6liF-afb7v5A" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"/><path d="M10 12h4"/></svg>
+          <span class="card-title">How to Archive a Project</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Reopening_a_Job_and_Accessing_Media__i0LNh0JSSdili1uCl0jfag" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"/><path d="M11 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M8 11v-4a4 4 0 0 1 8 0"/></svg>
+          <span class="card-title">How to Reopen a Project from Archived</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Add_Staff_to_a_Project__EvhNc9mbSUqrBB_9Y_cvbA" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/></svg>
+          <span class="card-title">How to Add Staff to a Project</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Add_Project_Attributes_in_Job_Dox__C5gklSWqRBqTaxgaZnwLdw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z"/></svg>
+          <span class="card-title">How to Add Project Attributes</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_To_Add_Project_Dates_In_JobDox__Ta8sjh38RKW9FctYQJeJhg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/><path d="M11 15h1"/><path d="M12 15v3"/></svg>
+          <span class="card-title">How to Add Project Dates</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Complete_a_Project_Date_Mobile_Device__5oq2kXzeTbaW0A6HADWD2A" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"/><path d="M11 4h2"/><path d="M12 17v.01"/></svg>
+          <span class="card-title">How to Complete a Project Date<span class="card-badge">Mobile</span></span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Update_a_Projects_Work_Type_Mobile_Device__ILECaHNtTCeBiZc0MkxWBA" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"/><path d="M11 4h2"/><path d="M12 17v.01"/></svg>
+          <span class="card-title">How to Update a Project's Work Type<span class="card-badge">Mobile</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-budget">Budget &amp; Billing</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/Uploading_an_Xactimate__oH1P4oO6QjWtJ6NA1TmlCw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 9l5 -5l5 5"/><path d="M12 4v12"/></svg>
+          <span class="card-title">How to Upload an Xactimate in Budget</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Adding_a_receipt_in_budget__N2DZ1pbvTJiDU0rShycdxw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2z"/><path d="M9 7h6"/><path d="M9 11h6"/></svg>
+          <span class="card-title">How to Add a Credit Card Receipt in Budget</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Building_an_Estimate_Emailing_an_Estimate_Building_an_Invoice_off_of_the_Estimate_Requesting_payment_on_Invoice__78AW1DzrSfyfm7XJzZrt3g" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M9 7h1"/><path d="M9 13h6"/><path d="M13 17h2"/></svg>
+          <span class="card-title">How to Build an Estimate, Email It, Build an Invoice &amp; Request Payment</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_update_your_payment_method_in_JobDox__wIa4KCbGTMmWuiZ96XiSWA" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M3 10h18"/><path d="M7 15h.01"/><path d="M11 15h2"/></svg>
+          <span class="card-title">How to Update Your Payment Method</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Referral_Fees__nPyaASseTieFI7KANsHOvA" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/><path d="M16 19h6"/><path d="M19 16v6"/></svg>
+          <span class="card-title">Referral Fees</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-users">Users &amp; Access</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/Adding_a_New_User_in_JobDox__10OlwnfRQhmrA2T54nRXpA" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4"/><path d="M16 19h6"/><path d="M19 16v6"/></svg>
+          <span class="card-title">How to Add a New User</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Step-by-Step_Guide_Managing_customer_access_or_A_view_of_what_the_customer_has_access_to__4ki_BbZvQ_6DiJc73rHATw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4"/><path d="M15 19l2 2l4 -4"/></svg>
+          <span class="card-title">How to Manage Customer Access &amp; View Their History</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Granting_Access_to_Job_Contacts_in_JobDox__k90gdi4AQBCbB5oiHQ2kbg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"/><path d="M11 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M8 11v-4a4 4 0 0 1 8 0"/></svg>
+          <span class="card-title">How to Grant Access to Contacts</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Accessing_Employee_Tasks__hmw2_k58RbKTu9Flm1uriQ" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3l8 -8"/><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9"/></svg>
+          <span class="card-title">How to Access Individual Employee Tasks</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_text_a_document_to_a_customer__FeNJwqiuTtmIMrQ-hiKH8g" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8"/><path d="M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3z"/></svg>
+          <span class="card-title">How to Text a Document to a Client</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-settings">Settings &amp; Configuration</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/How_To_Add_New_Project_Types_And_Work_Types__LXavwcGbRnKKrAN1nJ-hvQ" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><path d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h2"/></svg>
+          <span class="card-title">How to Add New Project and Work Types</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Setup_custom_attributes_on_JobDox__WCW0HEz4STmKqxaZkVCFZg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10h3v-3l-3.5 -3.5a6 6 0 0 1 8 8l6 6a2 2 0 0 1 -3 3l-6 -6a6 6 0 0 1 -8 -8l3.5 3.5"/></svg>
+          <span class="card-title">How to Setup Custom Attributes</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Changing_Project_Number_Style__2vqUR30ERLae2lTYIF5ckg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9h14"/><path d="M5 15h14"/><path d="M11 4l-4 16"/><path d="M17 4l-4 16"/></svg>
+          <span class="card-title">How to Change Project Number Style</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Enabling_Call_Recording_Feature__giE2PDrgT8erizfSjx2GyQ" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5a3 3 0 0 1 3 -3a3 3 0 0 1 3 3v5a3 3 0 0 1 -3 3a3 3 0 0 1 -3 -3z"/><path d="M5 10a7 7 0 0 0 14 0"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          <span class="card-title">How to Enable Call Recording</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Subscribe_to_a_Newsfeed_Event_for_Notifications_from_Dashboard__XeCb4nynTXO74kLxo8xxmw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/></svg>
+          <span class="card-title">How to Subscribe to Newsfeed Notifications</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/JobDox_open_API__P4YA5p-tRRqKYLDu_rAJow" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.785 6l8.215 8.215l-2.054 2.054a5.81 5.81 0 1 1 -8.215 -8.215l2.054 -2.054z"/><path d="M4 20l3.5 -3.5"/><path d="M15 4l-3.5 3.5"/><path d="M20 9l-3.5 3.5"/></svg>
+          <span class="card-title">JobDox Open API</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Download_Vendor_Email_List__Vr07qCk9SaySbrkO6ekY9Q" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M3 7l9 6l9 -6"/></svg>
+          <span class="card-title">How to Download Vendor Email List</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-reporting">Reporting &amp; Search</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/Generating_a_Project_Summary_Report_with_Documents__v81YjH_zRhy5plOpUAanyQ" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M9 9h1"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>
+          <span class="card-title">How to Generate a Project Summary Report with Documents</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_download_job_information_from_JobDox__lOwtll86R3uTOXu6JHLsMg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4v12"/></svg>
+          <span class="card-title">How to Download Advanced Search Results</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Advanced_Search_Downloading_Options_and_Batch_Closing__fPG7GCdpQTa6nRp1HvIccw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+          <span class="card-title">Advanced Search: Downloading Options and Batch Closing</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-fieldops">Field Operations &amp; Time Tracking</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/How_to_clock_in_and_out_of_JobDox__WLNIMtUsQ8Wh8RgDYAnEfg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M12 7v5l3 3"/></svg>
+          <span class="card-title">How to Clock In and Out of JobDox</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/Clocking_into_Tasks_on_JobDox__Wj7T1q-qThmYtson9INBQA" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4.5l-4 4l-4 1.5l-1.5 1.5l7 7l1.5 -1.5l1.5 -4l4 -4"/><path d="M9 15l-4.5 4.5"/><path d="M14.5 4l5.5 5.5"/></svg>
+          <span class="card-title">How to Clock Into Specific Tasks</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-drying">Drying</h2>
+      <div class="card-grid">
+        <a class="card" href="https://scribehow.com/viewer/How_to_Create_a_Drying_Report_in_JobDox__caBQ7IXIT9uvoBiOaH-fJg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.8 11a6 6 0 1 0 10.396 0l-5.197 -8l-5.199 8z"/></svg>
+          <span class="card-title">How to Create a Drying Report</span>
+        </a>
+        <a class="card" href="https://scribehow.com/viewer/How_to_Copy_a_Drying_Chamber_to_Another_Project__XFvQmg4kQ5u9r7Vp6j5UPw" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.667 7a2.667 2.667 0 0 0 -2.667 2.667v8.666a2.667 2.667 0 0 0 2.667 2.667h8.666a2.667 2.667 0 0 0 2.667 -2.667v-8.666a2.667 2.667 0 0 0 -2.667 -2.667z"/><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"/></svg>
+          <span class="card-title">How to Copy a Drying Chamber to Another Project</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-head" id="cl-videos">Video Tutorials</h2>
+      <div class="card-grid">
+        <a class="card" href="https://www.youtube.com/watch?v=pzVn3NtP55k" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">High Level Overview</span>
+        </a>
+        <a class="card" href="https://drive.google.com/file/d/1fINRzaNvkHZQoHB2hsCxVilYSngazrLm/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">Mobile Interface (Shorter Version)</span>
+        </a>
+        <a class="card" href="https://drive.google.com/file/d/1KzHIx6Gjq4R8BrYSF0-5IQ0TaDxdR3Qm/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">Mobile Interface: Job View</span>
+        </a>
+        <a class="card" href="https://drive.google.com/file/d/1h4MeTskVmlU4OszZ7mt_j7xpIy3WNzW8/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">Setting Up Project Types</span>
+        </a>
+        <a class="card" href="https://youtu.be/u7ilhrE3WQc" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">How to Create a Job/Project</span>
+        </a>
+        <a class="card" href="https://drive.google.com/file/d/1mrBRu1ooDkZHzrEKPMkc2OZrAgTD73MK/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">How to Have Someone Complete a Document</span>
+        </a>
+        <a class="card" href="https://youtu.be/XKJed10zmBg" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">How to Create a Project Report</span>
+        </a>
+        <a class="card" href="https://drive.google.com/file/d/1zdETtbObEBR4JF2utsCwtKrZuMdo35iH/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="card-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16l13 -8z"/></svg>
+          <span class="card-title">Quick Estimate Edit &amp; Import</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<!-- The hyphenated spelling in the line below is correct there and ONLY there,
+     because it names the legal entity. The brand everywhere else on this page
+     is JobDox, unhyphenated, and tools/brand-check.mjs enforces the difference:
+     its rule permits the hyphenated form only when LLC follows it. -->
+<footer class="site-foot">
+  <p>&copy; 2026 Job-Dox LLC</p>
+</footer>
+
+</body>
+</html>
