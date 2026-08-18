@@ -31,6 +31,24 @@ const ROOT = new URL('..', import.meta.url).pathname;
 /* This repo is one page at the root plus tools/, so the root walked recursively
    is the whole scan. SKIP_DIRS below is what keeps brand/ out of it. */
 const SCAN_DIRS = ['.'];
+/* WIDENING THIS LIST IS NOT FREE, AND '.md' IN PARTICULAR IS A TRAP.
+
+   Adding '.md' fails the build immediately, on two files that are correct as
+   they stand. README.md and brand/README.md both name the repository the
+   content and the brand tokens came from, and that repository is called
+   Job-Dox-Website. The Job-Dox rule below permits the hyphenated spelling only
+   when LLC or .com follows it, and '-Website' satisfies neither lookahead, so a
+   real repository name would be reported as a brand error. The rule is right;
+   the file names are right; only the pairing is wrong.
+
+   Un-skipping brand/ in SKIP_DIRS fails the same way for a different reason.
+   brand/tokens.css carries 22 em-dashes, which the em-dash rule below bans, and
+   that file is a one-way copy this repository is explicitly not allowed to
+   correct. Scanning it would mean a permanently red build with no legal fix.
+
+   So if either scope ever needs widening, the rules need an exemption written
+   first, in the same change. Do not widen the scope and then loosen a rule to
+   make the result pass: that trades a real guarantee for a green tick. */
 const SCAN_EXTENSIONS = ['.html', '.css', '.js', '.mjs'];
 
 /* This file has to spell out every banned string in order to look for it, so

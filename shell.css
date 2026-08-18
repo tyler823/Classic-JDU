@@ -142,10 +142,19 @@ body {
 /* SET FROM TYPE. THERE IS NO LOGO FILE IN THIS PROJECT AND NONE SHOULD BE ADDED.
 
    That is a brand requirement rather than a shortcut. This site documents
-   Classic, the legacy product, and it must carry no Cortex logo, no Cortex
-   wordmark and no Cortex product name. A wordmark set from type cannot drift
-   into carrying the wrong brand the way a copied asset file can, and there is no
-   file for anyone to swap.
+   Classic, the legacy product, and it must carry no logo, no wordmark and no
+   product name belonging to the current platform. A wordmark set from type
+   cannot drift into carrying the wrong brand the way a copied asset file can,
+   and there is no file for anyone to swap.
+
+   The same reasoning keeps the browser tab iconless: every icon file that
+   exists anywhere in this project family carries the current platform mark, so
+   there is nothing here to point a favicon at. Do not borrow one to fill the
+   gap.
+
+   This comment is served. A stylesheet is a public URL under publish = ".", so
+   the current platform is described here rather than named, for the same reason
+   the page itself never names it.
 
    Two parts on one baseline: the name, and a tag naming which product this
    documents. */
